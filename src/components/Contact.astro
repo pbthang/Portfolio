@@ -1,0 +1,125 @@
+<section
+  class="flex justify-center mx-auto py-8 bg-primary w-full"
+  id="Contact"
+>
+  <div class="container flex justify-center">
+    <div class="px-4 py-8 w-full max-w-3xl">
+      <h1 class="text-4xl font-bold mb-6">Contact</h1>
+      <div>
+        <form
+          id="contact-form"
+          name="contactForm"
+          accept-charset="utf-8"
+          action="https://formspree.io/f/mpzkjypd"
+          method="POST"
+        >
+          <div class="form-control w-full" id="form-contact-name">
+            <label class="label" for="contact-name">
+              <span class="label-text">Your name</span>
+              <span class="label-text-alt text-error">***</span>
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="contact-name"
+              placeholder="Name"
+              required
+              auto-complete="on"
+              class="input w-full"
+            />
+          </div>
+
+          <div class="form-control w-full" id="form-contact-email">
+            <label class="label" for="contact-email">
+              <span class="label-text">Your email</span>
+              <span class="label-text-alt text-error">***</span>
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="contact-email"
+              placeholder="Email*"
+              required
+              auto-complete="on"
+              class="input w-full"
+            />
+          </div>
+
+          <div class="form-control w-full" id="form-contact-subject">
+            <label class="label" for="contact-subject">
+              <span class="label-text">Subject</span>
+            </label>
+            <input
+              type="text"
+              name="subject"
+              id="contact-subject"
+              placeholder="Subject"
+              auto-complete="nope"
+              class="input w-full"
+            />
+          </div>
+
+          <div class="form-control w-full" id="form-contact-message">
+            <label class="label" for="contact-message">
+              <span class="label-text">Your message</span>
+              <span class="label-text-alt text-error">***</span>
+            </label>
+            <textarea
+              name="message"
+              id="contact-message"
+              placeholder="Your Message*"
+              required
+              auto-complete="nope"
+              class="textarea resize-none h-40"></textarea>
+          </div>
+          <div id="form-contact-submit">
+            <button
+              type="submit"
+              class="group btn float-right pl-8 pr-[4px] mt-4 flex items-center gap-2"
+            >
+              <span class="">SEND IT</span>
+              <i
+                class="ti ti-arrow-narrow-right text-2xl -translate-y-[1px] group-hover:translate-x-4 transition-all duration-300 ease-in-out"
+              ></i></button
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #form-contact-name {
+    grid-area: name;
+  }
+  #form-contact-email {
+    grid-area: email;
+  }
+  #form-contact-subject {
+    grid-area: subject;
+  }
+  #form-contact-message {
+    grid-area: message;
+  }
+  #form-contact-submit {
+    grid-area: submit;
+  }
+  #contact-form {
+    display: grid;
+    grid-template: 1fr 1fr 2fr 1fr / 1fr 1fr;
+    grid-template-areas:
+      "name email"
+      "subject subject"
+      "message message"
+      "submit submit";
+    column-gap: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    #contact-form {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,56 @@
+---
+import CarouselCard from "./CarouselCard.astro";
+
+interface Props {
+  projects: {
+    title: string;
+    description: string;
+    imgSrc: string;
+    link: string;
+  }[];
+}
+
+const { projects } = Astro.props as Props;
+---
+
+<section
+  class="container flex justify-center mx-auto py-8 w-full"
+  id="Projects"
+>
+  <div class="px-4 py-8">
+    <h1 class="text-4xl font-bold mb-6">My projects</h1>
+    <!-- <div class="w-full max-w-8xl"> -->
+    <div class="w-full max-w-8xl">
+      <div class="carousel carousel-center w-full space-x-8">
+        {
+          projects.map((project) => (
+            <CarouselCard
+              id={`project-${project.title}`}
+              title={project.title}
+              imgSrc={project.imgSrc}
+              link={project.link}
+            >
+              {project.description}
+            </CarouselCard>
+          ))
+        }
+      </div>
+      <!-- <div class="flex justify-center w-full py-2 gap-2">
+        {
+          projects.map((project, idx) => (
+            <a href={`#project-${project.title}`} class="btn btn-xs">
+              {idx + 1}
+            </a>
+          ))
+        }
+      </div> -->
+    </div>
+  </div>
+</section>
+
+<style>
+  .carousel {
+    scroll-padding-top: 200px;
+    scroll-behavior: smooth;
+  }
+</style>

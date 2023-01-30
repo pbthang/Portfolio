@@ -1,0 +1,70 @@
+---
+const navLinks = [
+  { name: "About", href: "#About" },
+  { name: "Skills", href: "#Skills" },
+  { name: "Projects", href: "#Projects" },
+  { name: "Contact", href: "#Contact" },
+];
+---
+
+<nav
+  class="navbar fixed top-0 z-30 h-16 w-full transition-all duration-100 shadow bg-opacity-80 backdrop-blur-sm bg-primary text-base-content"
+>
+  <div class="navbar-start">
+    <div class="dropdown">
+      <label tabindex="0" class="btn btn-ghost md:hidden">
+        <i class={`ti ti-menu-2 text-2xl`}></i>
+      </label>
+      <ul
+        tabindex="0"
+        class="menu dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-opacity-80 backdrop-blur-sm bg-primary text-base-content"
+      >
+        {
+          navLinks.map((nl) => (
+            <li class="navlink">
+              <div data-href={nl.href}>{nl.name}</div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div
+      class="btn btn-ghost normal-case text-xl"
+      onclick="window.scrollTo({top: 0, behavior: 'smooth'});"
+    >
+      <i class={`ti ti-code-dots text-2xl`}></i>
+
+      <span class="ml-2 text-base-content">pbthang</span>
+    </div>
+  </div>
+  <div class="navbar-center hidden md:flex text-base-content">
+    <ul class="menu menu-horizontal rounded-box">
+      {
+        navLinks.map((nl) => (
+          <li class="navlink">
+            <div data-href={nl.href}>{nl.name}</div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <!-- <a class="btn">Get started</a> -->
+  </div>
+</nav>
+
+<script>
+  const scrollToId = (id) => {
+    const el = document.querySelector(id);
+    const nav = document.querySelector("nav");
+    const position = el.offsetTop - nav.offsetHeight;
+    window.scrollTo({ top: position, behavior: "smooth" });
+  };
+  const navLinkEls = document.querySelectorAll(".navlink");
+  navLinkEls.forEach((nl) => {
+    nl.addEventListener("click", (e) => {
+      const href = nl.querySelector("div").dataset.href;
+      scrollToId(href);
+    });
+  });
+</script>

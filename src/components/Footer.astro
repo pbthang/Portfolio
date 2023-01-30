@@ -1,0 +1,46 @@
+---
+interface Props {
+  contacts: {
+    name: string;
+    link: string;
+    icon: string;
+  }[];
+}
+const { contacts } = Astro.props as Props;
+---
+
+<footer class="footer footer-center p-8 bg-primary text-primary-content">
+  <div class="grid grid-flow-col gap-4">
+    <a class="link link-hover hover:text-accent duration-150" href="#About"
+      >About me</a
+    >
+    <a class="link link-hover hover:text-accent duration-150" href="#Skills"
+      >Skills</a
+    >
+    <a class="link link-hover hover:text-accent duration-150" href="#Projects"
+      >My projects</a
+    >
+    <a class="link link-hover hover:text-accent duration-150" href="#Contact"
+      >Contact</a
+    >
+  </div>
+  <div>
+    <div class="grid grid-flow-col gap-4">
+      {
+        contacts.map((c) => (
+          <a
+            href={c.link}
+            target="_blank"
+            rel="noreferrer"
+            class="hover:text-accent duration-150"
+          >
+            <i class={`ti ti-${c.icon} text-2xl`} />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+  <div>
+    <p>Made by Thang Pham</p>
+  </div>
+</footer>

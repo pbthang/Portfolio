@@ -1,12 +1,13 @@
 # Welcome to [Astro](https://astro.build)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/77f1ee90-5361-4717-b7e2-c5f84f6db646/deploy-status)](https://app.netlify.com/sites/pbthang/deploys)
+
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
 [![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/s/github/withastro/astro/tree/latest/examples/basics)
 
 > 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
 ![basics](https://user-images.githubusercontent.com/4677417/186188965-73453154-fdec-4d6b-9c34-cb35c248ae5b.png)
-
 
 ## 🚀 Project Structure
 

@@ -15,7 +15,6 @@ import netlify from "@astrojs/netlify/functions";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), sitemap(), robotsTxt()],
-  site: "https://pbthang.github.io",
-  output: "server",
+  site: "https://pbthang.netlify.app",
   adapter: netlify(),
 });

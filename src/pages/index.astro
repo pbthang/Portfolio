@@ -9,9 +9,9 @@ import Footer from "../components/Footer.astro";
 import contentful from "contentful";
 
 const client = contentful.createClient({
-  space: import.meta.env.CONTENTFUL_SPACE_ID,
+  space: import.meta.env.CONTENTFUL_SPACE_ID || "dummy",
   environment: "master", // defaults to 'master' if not set
-  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN,
+  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN || "dummy",
 });
 
 const response = await client.getEntry("4YbeNIPoSrVXEhCUaGs9Yp");

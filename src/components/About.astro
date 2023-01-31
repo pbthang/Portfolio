@@ -36,8 +36,17 @@ const { img, education, experience } = Astro.props as Props;
           data-prefix="$"
           class="text-success"><code>cat info.txt</code></pre>
         <pre><code>Hi, I am Thang, and I am Vietnamese.</code></pre>
+        <pre><code>Study Computer Science at NUS.</code></pre>
+        <pre
+          data-prefix="$"
+          class="text-success"><code>less interest.txt</code></pre>
         <pre><code>I have keen interest in Software Engineering.</code></pre>
-        <pre data-prefix="$" class=""><code>_</code></pre>
+        <pre><code>I have experience in frontend development with React.</code></pre>
+        <pre><code>Some backend experience with Node.js.</code></pre>
+        <pre><code>:q</code></pre>
+        <pre
+          data-prefix="$"
+          class=""><code>Thank you and have a nice day!<span class="blinking">_</span></code></pre>
       </div>
     </div>
     <div class="md:flex md:justify-between mt-8 md:space-y-0 space-y-8">
@@ -55,5 +64,18 @@ const { img, education, experience } = Astro.props as Props;
   .avatar:hover {
     box-shadow: 14px 14px 0 hsl(var(--a)), -14px -14px 0 hsl(var(--p));
     transition: all 0.3s ease;
+  }
+  .blinking {
+    animation: 1s blink step-end infinite;
+  }
+
+  @keyframes blink {
+    from,
+    to {
+      color: transparent;
+    }
+    50% {
+      color: hsl(var(--nc));
+    }
   }
 </style>

@@ -21,10 +21,13 @@ const resume = "https:" + response.fields.resume.fields.file.url;
 const education = response.fields.education;
 const experience = response.fields.experience;
 const skills = response.fields.skills;
-const projects = response.fields.projects;
+const projectImages = response.fields.projectImages.map((obj) => {
+  return "https:" + obj.fields.file.url;
+});
+const projects = response.fields.projects.map((obj, index) => {
+  return { ...obj, imgSrc: projectImages[index] };
+});
 const contacts = response.fields.contacts;
-
-// console.log(profileImage);
 ---
 
 <Layout>

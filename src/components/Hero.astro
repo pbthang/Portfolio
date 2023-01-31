@@ -7,15 +7,22 @@ interface Props {
 const { img, resume } = Astro.props as Props;
 ---
 
+<!-- <div
+  class="hero min-h-screen bg-cover bg-fixed relative"
+  style={`background-image: url(${img});`}
+> -->
 <div
   class="hero min-h-screen bg-cover bg-fixed relative"
   style={`background-image: url(${img});`}
 >
-  <div class="hero-overlay bg-opacity-60"></div>
-  <div class="hero-content text-center text-neutral-content">
-    <code class="max-w-2xl">
+  <canvas
+    class="hero-bg hero-overlay bg-opacity-10 w-full h-full z-1 bg-secondary"
+  ></canvas>
+  <div class="hero-overlay bg-opacity-40"></div>
+  <div class="hero-content w-9/12 text-neutral-content">
+    <code class="max-w-2xl w-full">
       <div class="mb-4 text-2xl sm:text-4xl lg:text-5xl">Hello world!</div>
-      <div class="mb-2 text-2xl sm:text-4xl lg:text-5xl">I am Thang Pham,</div>
+      <div class="mb-4 text-2xl sm:text-4xl lg:text-5xl">I am Thang Pham,</div>
       <div class="mb-8 text-2xl sm:text-4xl lg:text-5xl">
         a <span id="typewriter"></span>
       </div>
@@ -36,20 +43,16 @@ const { img, resume } = Astro.props as Props;
     href="#About"
   >
     <i
-      class="ti ti-chevron-down text-2xl group-hover:translate-y-2 group-hover:text-accent duration-300"
+      class="ti ti-chevron-down text-4xl group-hover:translate-y-2 group-hover:text-accent duration-300"
     ></i>
   </a>
 </div>
 
-<style>
-  @import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
-  code {
-    font-family: "Fira Code", monospace;
-  }
-</style>
+<style></style>
 
 <script>
   import Typewriter from "typewriter-effect/dist/core";
+  import * as THREE from "three";
 
   new Typewriter("#typewriter", {
     strings: ["Software Engineer", "CS student", "Vietnamese"],
@@ -57,4 +60,115 @@ const { img, resume } = Astro.props as Props;
     loop: true,
     cursor: "_",
   });
+
+  const canvas = document.querySelector(".hero-bg") as HTMLCanvasElement;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  );
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    alpha: true,
+  });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.position.z = 30;
+
+  renderer.render(scene, camera);
+
+  const geometry1 = new THREE.TorusKnotGeometry(10, 3, 100, 16, 3, 2);
+  const geometry2 = new THREE.TorusKnotGeometry(14, 4, 100, 16);
+  const geometry3 = new THREE.DodecahedronGeometry(6, 0);
+
+  const material1 = new THREE.MeshNormalMaterial({
+    color: 0xff6347,
+  });
+  const material2 = new THREE.MeshNormalMaterial({
+    color: 0xfca311,
+  });
+  const material3 = new THREE.MeshStandardMaterial({
+    color: 0x6495ed,
+  });
+
+  const torus1 = new THREE.Mesh(geometry1, material1);
+  const torus2 = new THREE.Mesh(geometry2, material2);
+  const dodecahedron = new THREE.Mesh(geometry3, material3);
+
+  const torus1InitialPosition = [-20, -6, 0];
+  const torus1InitialRotation = [10, -20, 40];
+  const torus2InitialPosition = [24, 0, -10];
+  const torus2InitialRotation = [-10, 20, 30];
+  const dodecahedronInitialPosition = [0, 0, 0];
+  const dodecahedronInitialRotation = [0, 0, 0];
+
+  torus1.position.x = torus1InitialPosition[0];
+  torus1.position.y = torus1InitialPosition[1];
+  torus1.position.z = torus1InitialPosition[2];
+  torus1.rotation.x = torus1InitialRotation[0];
+  torus1.rotation.y = torus1InitialRotation[1];
+  torus1.rotation.z = torus1InitialRotation[2];
+  scene.add(torus1);
+
+  torus2.position.x = torus2InitialPosition[0];
+  torus2.position.y = torus2InitialPosition[1];
+  torus2.position.z = torus2InitialPosition[2];
+  torus2.rotation.x = torus2InitialRotation[0];
+  torus2.rotation.y = torus2InitialRotation[1];
+  torus2.rotation.z = torus2InitialRotation[2];
+  scene.add(torus2);
+
+  dodecahedron.position.x = dodecahedronInitialPosition[0];
+  dodecahedron.position.y = dodecahedronInitialPosition[1];
+  dodecahedron.position.z = dodecahedronInitialPosition[2];
+  dodecahedron.rotation.x = dodecahedronInitialRotation[0];
+  dodecahedron.rotation.y = dodecahedronInitialRotation[1];
+  dodecahedron.rotation.z = dodecahedronInitialRotation[2];
+  // scene.add(dodecahedron);
+
+  const pointLight = new THREE.PointLight(0xffffff);
+  pointLight.position.set(5, 5, 5);
+  scene.add(pointLight);
+
+  const ambientLight = new THREE.AmbientLight(0xffffff);
+  scene.add(ambientLight);
+
+  function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    const x = e.clientX / window.innerWidth - 0.5;
+    const y = e.clientY / window.innerHeight - 0.5;
+    camera.position.x = x * 10;
+    camera.position.y = y * 10;
+    camera.lookAt(scene.position);
+  });
+
+  document.body.onscroll = () => {
+    const y = window.scrollY;
+    torus1.position.x = torus1InitialPosition[0] + y / 10;
+    torus1.position.y = torus1InitialPosition[1] + y / 60;
+    torus1.position.z = torus1InitialPosition[2] - y / 20;
+    torus2.position.x = torus2InitialPosition[0] - y / 10;
+    torus2.position.y = torus2InitialPosition[1] - y / 60;
+    torus2.position.z = torus2InitialPosition[2] + y / 20;
+
+    torus1.rotation.x = torus1InitialRotation[0] + y / 110;
+    torus1.rotation.y = torus1InitialRotation[1] + y / 100;
+    torus1.rotation.z = torus1InitialRotation[2] + y / 800;
+    torus2.rotation.x = torus2InitialRotation[0] - y / 90;
+    torus2.rotation.y = torus2InitialRotation[1] - y / 700;
+    torus2.rotation.z = torus2InitialRotation[2] + y / 60;
+    camera.lookAt(scene.position);
+  };
 </script>

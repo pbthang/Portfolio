@@ -16,7 +16,9 @@ const { title = "Lorem ipsum dolor", icon, color } = Astro.props as Props;
       <h2 class="text-2xl font-bold">{title}</h2>
       <p class="mt-4"><slot /></p>
     </div>
-    <i class={`ti ti-${icon} absolute top-8 -right-16 text-current`}></i>
+    <i
+      class={`ti ti-${icon} absolute top-8 -right-16 text-current text-[14rem] opacity-40`}
+    ></i>
     <!-- <div class="card-actions justify-end"> -->
     <!-- <button class="btn btn-primary">Listen</button> -->
   </div>
@@ -27,6 +29,9 @@ const { title = "Lorem ipsum dolor", icon, color } = Astro.props as Props;
     font-size: 14rem;
     opacity: 0.4;
     transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
   }
   .mockup-window:hover .ti {
     color: var(--color);

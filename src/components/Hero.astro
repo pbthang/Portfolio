@@ -61,6 +61,18 @@ const { img, resume } = Astro.props as Props;
     cursor: "_",
   });
 
+  const setPositon = (obj, position) => {
+    obj.position.x = position[0];
+    obj.position.y = position[1];
+    obj.position.z = position[2];
+  };
+
+  const setRotation = (obj, rotation) => {
+    obj.rotation.x = rotation[0];
+    obj.rotation.y = rotation[1];
+    obj.rotation.z = rotation[2];
+  };
+
   const canvas = document.querySelector(".hero-bg") as HTMLCanvasElement;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
@@ -103,28 +115,16 @@ const { img, resume } = Astro.props as Props;
   const dodecahedronInitialPosition = [0, 0, 0];
   const dodecahedronInitialRotation = [0, 0, 0];
 
-  torus1.position.x = torus1InitialPosition[0];
-  torus1.position.y = torus1InitialPosition[1];
-  torus1.position.z = torus1InitialPosition[2];
-  torus1.rotation.x = torus1InitialRotation[0];
-  torus1.rotation.y = torus1InitialRotation[1];
-  torus1.rotation.z = torus1InitialRotation[2];
+  setPositon(torus1, torus1InitialPosition);
+  setRotation(torus1, torus1InitialRotation);
   scene.add(torus1);
 
-  torus2.position.x = torus2InitialPosition[0];
-  torus2.position.y = torus2InitialPosition[1];
-  torus2.position.z = torus2InitialPosition[2];
-  torus2.rotation.x = torus2InitialRotation[0];
-  torus2.rotation.y = torus2InitialRotation[1];
-  torus2.rotation.z = torus2InitialRotation[2];
+  setPositon(torus2, torus2InitialPosition);
+  setRotation(torus2, torus2InitialRotation);
   scene.add(torus2);
 
-  dodecahedron.position.x = dodecahedronInitialPosition[0];
-  dodecahedron.position.y = dodecahedronInitialPosition[1];
-  dodecahedron.position.z = dodecahedronInitialPosition[2];
-  dodecahedron.rotation.x = dodecahedronInitialRotation[0];
-  dodecahedron.rotation.y = dodecahedronInitialRotation[1];
-  dodecahedron.rotation.z = dodecahedronInitialRotation[2];
+  setPositon(dodecahedron, dodecahedronInitialPosition);
+  setRotation(dodecahedron, dodecahedronInitialRotation);
   // scene.add(dodecahedron);
 
   const pointLight = new THREE.PointLight(0xffffff);
@@ -154,21 +154,28 @@ const { img, resume } = Astro.props as Props;
     camera.lookAt(scene.position);
   });
 
-  document.body.onscroll = () => {
+  document.addEventListener("scroll", () => {
     const y = window.scrollY;
-    torus1.position.x = torus1InitialPosition[0] + y / 10;
-    torus1.position.y = torus1InitialPosition[1] + y / 60;
-    torus1.position.z = torus1InitialPosition[2] - y / 20;
-    torus2.position.x = torus2InitialPosition[0] - y / 10;
-    torus2.position.y = torus2InitialPosition[1] - y / 60;
-    torus2.position.z = torus2InitialPosition[2] + y / 20;
+    setPositon(torus1, [
+      torus1InitialPosition[0] + y / 10,
+      torus1InitialPosition[1] + y / 60,
+      torus1InitialPosition[2] - y / 20,
+    ]);
+    setPositon(torus2, [
+      torus2InitialPosition[0] - y / 10,
+      torus2InitialPosition[1] - y / 60,
+      torus2InitialPosition[2] + y / 20,
+    ]);
 
-    torus1.rotation.x = torus1InitialRotation[0] + y / 110;
-    torus1.rotation.y = torus1InitialRotation[1] + y / 100;
-    torus1.rotation.z = torus1InitialRotation[2] + y / 800;
-    torus2.rotation.x = torus2InitialRotation[0] - y / 90;
-    torus2.rotation.y = torus2InitialRotation[1] - y / 700;
-    torus2.rotation.z = torus2InitialRotation[2] + y / 60;
-    camera.lookAt(scene.position);
-  };
+    setRotation(torus1, [
+      torus1InitialRotation[0] + y / 110,
+      torus1InitialRotation[1] + y / 100,
+      torus1InitialRotation[2] + y / 800,
+    ]);
+    setRotation(torus2, [
+      torus2InitialRotation[0] - y / 90,
+      torus2InitialRotation[1] - y / 700,
+      torus2InitialRotation[2] + y / 60,
+    ]);
+  });
 </script>

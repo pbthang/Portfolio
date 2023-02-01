@@ -18,14 +18,15 @@ const { projects } = Astro.props as Props;
   id="Projects"
 >
   <div class="px-4 py-8">
-    <h1 class="text-4xl font-bold mb-6">My projects</h1>
-    <!-- <div class="w-full max-w-8xl"> -->
+    <h1 class="text-4xl font-bold mb-6 ml-4">My projects</h1>
     <div class="w-full max-w-8xl">
-      <div class="carousel carousel-center w-full space-x-8">
+      <div
+        class="slider whitespace-nowrap overflow-scroll scrollbar-hide snap-mandatory snap-x w-[360px] sm:w-[600px] md:w-[720px] lg:w-[960px] xl:w-[1100px]"
+      >
         {
           projects.map((project) => (
             <CarouselCard
-              id={`project-${project.title}`}
+              id={`project-${project.title.replace(/\s+/g, "")}`}
               title={project.title}
               imgSrc={project.imgSrc}
               link={project.link}
@@ -35,22 +36,48 @@ const { projects } = Astro.props as Props;
           ))
         }
       </div>
-      <!-- <div class="flex justify-center w-full py-2 gap-2">
-        {
-          projects.map((project, idx) => (
-            <a href={`#project-${project.title}`} class="btn btn-xs">
-              {idx + 1}
-            </a>
-          ))
-        }
+      <!-- <div class="btn-group flex gap-2 justify-end w-full mt-4">
+        <button class="left-btn btn-square btn-primary btn-sm rounded"
+          >&lt;</button
+        >
+        <button class="right-btn btn-square btn-primary btn-sm rounded"
+          >&gt;</button
+        >
       </div> -->
     </div>
   </div>
 </section>
 
 <style>
-  .carousel {
-    scroll-padding-top: 200px;
-    /* scroll-behavior: smooth; */
+  /* For Webkit-based browsers (Chrome, Safari and Opera) */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* For IE, Edge and Firefox */
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 </style>
+
+<script>
+  // import $ from "jquery";
+
+  // const carousel = $(".slider");
+  // const btnLeft = $(".btn-group .left-btn");
+  // const btnRight = $(".btn-group .right-btn");
+  // const slideWidth = $(".slider .carousel-slide").width();
+
+  // btnLeft.click(function () {
+  //   console.log("clicked");
+  //   carousel.animate(
+  //     {
+  //       scrollLeft: $("#project-OpenRealm").offset().left,
+  //     },
+  //     "slow"
+  //   );
+  // });
+
+  // btnRight.click(function () {});
+</script>

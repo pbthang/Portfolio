@@ -1,12 +1,23 @@
 ---
 import Loader from "../components/Loader.astro";
 import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
 
 export interface Props {
   title?: string;
+  contacts?: {
+    name: string;
+    link: string;
+    icon: string;
+  }[];
+  photo?: string;
 }
 
-const { title } = Astro.props as Props;
+const {
+  title = "Thang Pham's Portfolio",
+  contacts,
+  photo,
+} = Astro.props as Props;
 ---
 
 <!DOCTYPE html>
@@ -20,9 +31,22 @@ const { title } = Astro.props as Props;
       href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>{title || "Thang Pham's Portfolio"}</title>
-  </head>
-  <body>
+    <title>{title}</title>
+    <meta
+      name="description"
+      content="Portfolio - Thang Pham - a Software Engineer"
+    />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:title" content="Pham Ba Thang - Portfolio" />
+    <meta property="og:url" content="https://pbthang.netlify.app/" />
+    <meta property="og:image" content={photo} />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:description"
+      content="Hi, I am Thang Pham, a Software Engineer and a Computer Science student at NUS"
+    />
+  </head><body>
     <div
       id="preloader"
       class="fixed z-50 bg-primary w-screen h-screen flex justify-center items-center duration-200"
@@ -32,9 +56,11 @@ const { title } = Astro.props as Props;
     <div class="page opacity-0">
       <Navbar />
       <slot />
+      <Footer contacts={contacts} />
     </div>
   </body>
 </html>
+
 <style is:global>
   @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
   @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");

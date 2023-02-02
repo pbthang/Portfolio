@@ -5,7 +5,6 @@ import Hero from "../components/Hero.astro";
 import Projects from "../components/Projects.astro";
 import Skills from "../components/Skills.astro";
 import Layout from "../layouts/Layout.astro";
-import Footer from "../components/Footer.astro";
 import contentful from "contentful";
 
 const client = contentful.createClient({
@@ -30,7 +29,7 @@ const projects = response.fields.projects.map((obj, index) => {
 const contacts = response.fields.contacts;
 ---
 
-<Layout>
+<Layout contacts={contacts} photo={profileImage}>
   <Hero img={coverImage} resume={resume} />
   <main class="">
     <About img={profileImage} education={education} experience={experience} />
@@ -38,7 +37,6 @@ const contacts = response.fields.contacts;
     <Projects projects={projects} />
     <Contact />
   </main>
-  <Footer contacts={contacts} />
 </Layout>
 
 <style></style>

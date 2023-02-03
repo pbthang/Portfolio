@@ -8,7 +8,7 @@ const navLinks = [
 ---
 
 <nav
-  class="navbar fixed top-0 z-30 h-16 w-full transition-all duration-100 shadow bg-opacity-80 text-base-content"
+  class="navbar fixed top-0 z-30 h-16 w-full transition-all duration-100 shadow-transparent bg-opacity-80 text-base-content"
 >
   <div class="navbar-start">
     <div class="dropdown">
@@ -17,7 +17,7 @@ const navLinks = [
       </label>
       <ul
         tabindex="0"
-        class="menu dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-opacity-80 backdrop-blur-sm bg-primary text-base-content"
+        class="menu dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-opacity-80 shadow-transparent text-base-content"
       >
         {
           navLinks.map((nl) => (
@@ -76,13 +76,18 @@ const navLinks = [
 
   document.addEventListener("scroll", () => {
     const nav = document.querySelector("nav");
+    const menu = document.querySelector(".menu");
     const scrollPosition = window.scrollY;
     if (scrollPosition > 5) {
-      nav.classList.remove("shadow-lg", "bg-transparent");
+      nav.classList.remove("shadow-transparent", "bg-transparent");
       nav.classList.add("backdrop-blur-sm", "bg-primary");
+      menu.classList.add("backdrop-blur-sm", "bg-primary");
+      menu.classList.remove("shadow-transparent", "bg-transparent");
     } else {
-      nav.classList.add("bg-transparent", "shadow-lg");
+      nav.classList.add("bg-transparent", "shadow-transparent");
       nav.classList.remove("backdrop-blur-sm", "bg-primary");
+      menu.classList.add("bg-transparent", "shadow-transparent");
+      menu.classList.remove("backdrop-blur-sm", "bg-primary");
     }
   });
 </script>

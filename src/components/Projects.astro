@@ -21,7 +21,7 @@ const { projects } = Astro.props as Props;
     <h1 class="text-4xl font-bold mb-6 ml-4">My projects</h1>
     <div class="w-full max-w-8xl">
       <div
-        class="slider whitespace-nowrap overflow-scroll scrollbar-hide snap-mandatory snap-x w-[360px] sm:w-[600px] md:w-[720px] lg:w-[960px] xl:w-[1100px]"
+        class="slider whitespace-nowrap overflow-scroll overflow-y-hidden scrollbar-hide snap-mandatory snap-x w-[360px] sm:w-[600px] md:w-[720px] lg:w-[960px] xl:w-[1100px]"
       >
         {
           projects.map((project) => (
@@ -66,15 +66,13 @@ const { projects } = Astro.props as Props;
   .slider {
     scroll-behavior: smooth;
   }
-  /* For Webkit-based browsers (Chrome, Safari and Opera) */
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
 
-  /* For IE, Edge and Firefox */
   .scrollbar-hide {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 </style>
 

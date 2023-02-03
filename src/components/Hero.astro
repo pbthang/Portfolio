@@ -7,36 +7,36 @@ interface Props {
 const { img, resume } = Astro.props as Props;
 ---
 
-<!-- <div
-  class="hero min-h-screen bg-cover bg-fixed relative"
-  style={`background-image: url(${img});`}
-> -->
 <div
   class="hero min-h-screen bg-cover bg-center bg-fixed relative"
   style={`background-image: url(${img});`}
 >
+  <div class="hidden">Image by rawpixel.com on Freepik</div>
+  <!-- <div class="hero min-h-screen bg-cover bg-center bg-fixed relative"> -->
   <canvas
     class="hero-bg hero-overlay bg-opacity-10 w-full h-full z-0 bg-secondary"
   ></canvas>
   <div class="hero-overlay bg-opacity-40 z-0"></div>
   <div class="hero-content w-10/12 text-neutral-content z-3">
-    <code class="max-w-2xl w-full">
-      <div class="mb-4 text-4xl sm:text-5xl lg:text-6xl">Hello world!</div>
-      <div class="mb-4 text-xl sm:text-3xl lg:text-4xl">I am Thang Pham,</div>
-      <div class="mb-8 text-xl sm:text-3xl lg:text-4xl">
-        a <span id="typewriter"></span>
+    <div class="max-w-2xl w-full font-bold text-white">
+      <div class="opacity-70">
+        <div class="mb-4 text-4xl sm:text-5xl lg:text-6xl">Hello world!</div>
+        <div class="mb-4 text-2xl sm:text-4xl lg:text-5xl">
+          I am Thang Pham,
+        </div>
+        <div class="mb-8 text-2xl sm:text-4xl lg:text-5xl">
+          a <span id="typewriter"></span>
+        </div>
       </div>
       <a href={resume} target="_blank" rel="noreferrer" role="button">
-        <button
-          class="btn btn-primary group pl-4 pr-[4px] items-center gap-1 font-[Poppins]"
-        >
+        <button class="btn btn-primary group pl-4 pr-[4px] items-center gap-1">
           <span>My resume</span>
           <i
             class="ti ti-arrow-narrow-right text-2xl -translate-y-[1px] group-hover:translate-x-4 transition-all duration-300 ease-in-out"
           ></i></button
         >
       </a>
-    </code>
+    </div>
   </div>
   <a
     class="absolute bottom-0 pt-2 pb-4 w-full group flex justify-center"
@@ -54,14 +54,16 @@ const { img, resume } = Astro.props as Props;
   import Typewriter from "typewriter-effect/dist/core";
   import * as THREE from "three";
 
+  import { RoomEnvironment } from "../utils/RoomEnvironment";
+
   new Typewriter("#typewriter", {
     strings: ["Software Engineer", "CS student", "Vietnamese"],
     autoStart: true,
     loop: true,
-    cursor: "_",
+    // cursor: "_",
   });
 
-  const setPositon = (obj, position) => {
+  const setPosition = (obj, position) => {
     obj.position.x = position[0];
     obj.position.y = position[1];
     obj.position.z = position[2];
@@ -74,7 +76,6 @@ const { img, resume } = Astro.props as Props;
   };
 
   const canvas = document.querySelector(".hero-bg") as HTMLCanvasElement;
-  const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
@@ -85,20 +86,52 @@ const { img, resume } = Astro.props as Props;
     canvas,
     alpha: true,
   });
+  const scene = new THREE.Scene();
+  // scene.environment = new THREE.CubeTextureLoader().load([
+  //   "px.png",
+  //   "nx.png",
+  //   "py.png",
+  //   "ny.png",
+  //   "pz.png",
+  //   "nz.png",
+  // ]);
+  const pmremGenerator = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmremGenerator.fromScene(
+    new RoomEnvironment(),
+    0.04
+  ).texture;
   renderer.setSize(window.innerWidth, window.innerHeight);
-  camera.position.z = 30;
+  setPosition(camera, [0, 80, 30]);
+  camera.lookAt(scene.position);
 
   renderer.render(scene, camera);
+
+  const gridSize = 400;
+  const gridDivisions = 28;
+  const gridColor = 0x708090;
+
+  const gridHelper = new THREE.GridHelper(
+    gridSize,
+    gridDivisions,
+    gridColor,
+    gridColor
+  );
+  scene.add(gridHelper);
 
   const geometry1 = new THREE.TorusKnotGeometry(10, 3, 100, 16, 3, 2);
   const geometry2 = new THREE.TorusKnotGeometry(14, 4, 100, 16);
   const geometry3 = new THREE.DodecahedronGeometry(6, 0);
 
-  const material1 = new THREE.MeshNormalMaterial({
-    // color: 0xff6347,
+  const material1 = new THREE.MeshStandardMaterial({
+    color: 0x6495ed,
+    roughness: 0,
+    metalness: 1,
   });
-  const material2 = new THREE.MeshNormalMaterial({
-    // color: 0xfca311,
+
+  const material2 = new THREE.MeshStandardMaterial({
+    color: 0xfca311,
+    roughness: 0,
+    metalness: 1,
   });
   const material3 = new THREE.MeshStandardMaterial({
     color: 0x6495ed,
@@ -108,33 +141,39 @@ const { img, resume } = Astro.props as Props;
   const torus2 = new THREE.Mesh(geometry2, material2);
   const dodecahedron = new THREE.Mesh(geometry3, material3);
 
-  const torus1InitialPosition = [-20, -6, 0];
-  const torus1InitialRotation = [10, -20, 40];
-  const torus2InitialPosition = [24, 0, -10];
-  const torus2InitialRotation = [-10, 20, 30];
+  // const torus1InitialPosition = [-20, -6, 0];
+  const torus1InitialPosition = [-19, 50, 26];
+  const torus1InitialRotation = [90, 90, 0];
+  // const torus2InitialPosition = [24, 0, -10];
+  const torus2InitialPosition = [24, 40, 14];
+  const torus2InitialRotation = [0, 0, 0];
+
   const dodecahedronInitialPosition = [0, 0, 0];
   const dodecahedronInitialRotation = [0, 0, 0];
 
-  setPositon(torus1, torus1InitialPosition);
+  setPosition(torus1, torus1InitialPosition);
   setRotation(torus1, torus1InitialRotation);
   scene.add(torus1);
 
-  setPositon(torus2, torus2InitialPosition);
+  setPosition(torus2, torus2InitialPosition);
   setRotation(torus2, torus2InitialRotation);
   scene.add(torus2);
 
-  setPositon(dodecahedron, dodecahedronInitialPosition);
+  setPosition(dodecahedron, dodecahedronInitialPosition);
   setRotation(dodecahedron, dodecahedronInitialRotation);
   // scene.add(dodecahedron);
-
-  const pointLight = new THREE.PointLight(0xffffff);
-  pointLight.position.set(5, 5, 5);
-  scene.add(pointLight);
 
   const ambientLight = new THREE.AmbientLight(0xffffff);
   scene.add(ambientLight);
 
   function animate() {
+    torus1.rotation.x += 0.003;
+    torus1.rotation.y += 0.004;
+    torus1.rotation.z += 0.002;
+
+    torus2.rotation.x += 0.003;
+    torus2.rotation.y += 0.004;
+    torus2.rotation.z += 0.002;
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
   }
@@ -146,36 +185,35 @@ const { img, resume } = Astro.props as Props;
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  window.addEventListener("mousemove", (e) => {
-    const x = e.clientX / window.innerWidth - 0.5;
-    const y = e.clientY / window.innerHeight - 0.5;
-    camera.position.x = x * 10;
-    camera.position.y = y * 10;
-    camera.lookAt(scene.position);
-  });
+  // window.addEventListener("mousemove", (e) => {
+  //   const x = e.clientX / window.innerWidth;
+  //   const y = e.clientY / window.innerHeight;
+  //   setPosition(camera, [x * 40 - 20, y * 40 - 20, 0]);
+  //   camera.lookAt(scene.position);
+  // });
 
   document.addEventListener("scroll", () => {
     const y = window.scrollY;
-    setPositon(torus1, [
-      torus1InitialPosition[0] + y / 10,
-      torus1InitialPosition[1] + y / 60,
-      torus1InitialPosition[2] - y / 20,
+    setPosition(torus1, [
+      torus1InitialPosition[0],
+      torus1InitialPosition[1],
+      torus1InitialPosition[2] - y / 40,
     ]);
-    setPositon(torus2, [
-      torus2InitialPosition[0] - y / 10,
-      torus2InitialPosition[1] - y / 60,
-      torus2InitialPosition[2] + y / 20,
+    setPosition(torus2, [
+      torus2InitialPosition[0],
+      torus2InitialPosition[1],
+      torus2InitialPosition[2] + y / 40,
     ]);
 
-    setRotation(torus1, [
-      torus1InitialRotation[0] + y / 110,
-      torus1InitialRotation[1] + y / 100,
-      torus1InitialRotation[2] + y / 800,
-    ]);
-    setRotation(torus2, [
-      torus2InitialRotation[0] - y / 90,
-      torus2InitialRotation[1] - y / 700,
-      torus2InitialRotation[2] + y / 60,
-    ]);
+    // setRotation(torus1, [
+    //   torus1InitialRotation[0] + y / 110,
+    //   torus1InitialRotation[1] + y / 100,
+    //   torus1InitialRotation[2] + y / 800,
+    // ]);
+    // setRotation(torus2, [
+    //   torus2InitialRotation[0] - y / 90,
+    //   torus2InitialRotation[1] - y / 700,
+    //   torus2InitialRotation[2] + y / 60,
+    // ]);
   });
 </script>

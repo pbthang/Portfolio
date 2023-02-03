@@ -44,11 +44,28 @@ const { projects } = Astro.props as Props;
           >&gt;</button
         >
       </div> -->
+      <div class="w-full flex justify-center gap-1 mt-2">
+        {
+          projects.map((p, idx) => (
+            <a href={`#project-${p.title.replace(/\s+/g, "")}`}>
+              <button class="btn-square btn-primary btn-xs rounded">
+                {idx + 1}
+              </button>
+            </a>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
 
 <style>
+  /* .section {
+    scroll-margin-top: 100px;
+  } */
+  .slider {
+    scroll-behavior: smooth;
+  }
   /* For Webkit-based browsers (Chrome, Safari and Opera) */
   .scrollbar-hide::-webkit-scrollbar {
     display: none;

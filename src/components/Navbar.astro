@@ -8,7 +8,7 @@ const navLinks = [
 ---
 
 <nav
-  class="navbar fixed top-0 z-30 h-16 w-full transition-all duration-100 shadow-transparent bg-opacity-80 text-base-content"
+  class="navbar fixed top-0 z-30 h-16 w-full transition-all duration-100 shadow-transparent bg-opacity-60 text-base-content"
 >
   <div class="navbar-start">
     <div class="dropdown">
@@ -80,14 +80,14 @@ const navLinks = [
     const scrollPosition = window.scrollY;
     if (scrollPosition > 5) {
       nav.classList.remove("shadow-transparent", "bg-transparent");
-      nav.classList.add("backdrop-blur-sm", "bg-primary");
-      menu.classList.add("backdrop-blur-sm", "bg-primary");
+      nav.classList.add("backdrop-blur-md", "bg-primary");
+      menu.classList.add("backdrop-blur-md", "bg-primary");
       menu.classList.remove("shadow-transparent", "bg-transparent");
     } else {
       nav.classList.add("bg-transparent", "shadow-transparent");
-      nav.classList.remove("backdrop-blur-sm", "bg-primary");
+      nav.classList.remove("backdrop-blur-md", "bg-primary");
       menu.classList.add("bg-transparent", "shadow-transparent");
-      menu.classList.remove("backdrop-blur-sm", "bg-primary");
+      menu.classList.remove("backdrop-blur-md", "bg-primary");
     }
   });
 </script>

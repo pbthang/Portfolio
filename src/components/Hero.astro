@@ -166,14 +166,18 @@ const { img, resume } = Astro.props as Props;
   const ambientLight = new THREE.AmbientLight(0xffffff);
   scene.add(ambientLight);
 
+  const pointLight = new THREE.PointLight(0xffffff, 1);
+  setPosition(pointLight, [0, 0, 0]);
+  scene.add(pointLight);
+
   function animate() {
     torus1.rotation.x += 0.003;
-    torus1.rotation.y += 0.004;
-    torus1.rotation.z += 0.002;
+    torus1.rotation.y += 0.003;
+    // torus1.rotation.z += 0.002;
 
     torus2.rotation.x += 0.003;
-    torus2.rotation.y += 0.004;
-    torus2.rotation.z += 0.002;
+    torus2.rotation.y += 0.003;
+    // torus2.rotation.z += 0.002;
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
   }
@@ -188,8 +192,11 @@ const { img, resume } = Astro.props as Props;
   // window.addEventListener("mousemove", (e) => {
   //   const x = e.clientX / window.innerWidth;
   //   const y = e.clientY / window.innerHeight;
-  //   setPosition(camera, [x * 40 - 20, y * 40 - 20, 0]);
-  //   camera.lookAt(scene.position);
+  //   setPosition(pointLight, [
+  //     (x - 0.5) * 100,
+  //     (y - 0.5) * 100,
+  //     pointLight.position.z,
+  //   ]);
   // });
 
   document.addEventListener("scroll", () => {

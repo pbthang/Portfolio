@@ -87,14 +87,6 @@ const { img, resume } = Astro.props as Props;
     alpha: true,
   });
   const scene = new THREE.Scene();
-  // scene.environment = new THREE.CubeTextureLoader().load([
-  //   "px.png",
-  //   "nx.png",
-  //   "py.png",
-  //   "ny.png",
-  //   "pz.png",
-  //   "nz.png",
-  // ]);
   const pmremGenerator = new THREE.PMREMGenerator(renderer);
   scene.environment = pmremGenerator.fromScene(
     new RoomEnvironment(),
@@ -118,9 +110,10 @@ const { img, resume } = Astro.props as Props;
   );
   scene.add(gridHelper);
 
-  const geometry1 = new THREE.TorusKnotGeometry(10, 3, 100, 16, 3, 2);
-  const geometry2 = new THREE.TorusKnotGeometry(14, 4, 100, 16);
-  const geometry3 = new THREE.DodecahedronGeometry(6, 0);
+  let geometry1 = new THREE.TorusKnotGeometry(10, 3, 200, 32, 3, 2);
+  const geometry2 = new THREE.TorusKnotGeometry(14, 4, 200, 32);
+  // geometry1 = THREE.BufferGeometryUtils.mergeVertices(geometry1, 0.1);
+  geometry1.computeVertexNormals();
 
   const material1 = new THREE.MeshStandardMaterial({
     color: 0x6495ed,
@@ -133,23 +126,14 @@ const { img, resume } = Astro.props as Props;
     roughness: 0,
     metalness: 1,
   });
-  const material3 = new THREE.MeshStandardMaterial({
-    color: 0x6495ed,
-  });
 
   const torus1 = new THREE.Mesh(geometry1, material1);
   const torus2 = new THREE.Mesh(geometry2, material2);
-  const dodecahedron = new THREE.Mesh(geometry3, material3);
 
-  // const torus1InitialPosition = [-20, -6, 0];
   const torus1InitialPosition = [-19, 50, 26];
   const torus1InitialRotation = [90, 90, 0];
-  // const torus2InitialPosition = [24, 0, -10];
   const torus2InitialPosition = [24, 40, 14];
   const torus2InitialRotation = [0, 0, 0];
-
-  const dodecahedronInitialPosition = [0, 0, 0];
-  const dodecahedronInitialRotation = [0, 0, 0];
 
   setPosition(torus1, torus1InitialPosition);
   setRotation(torus1, torus1InitialRotation);
@@ -159,16 +143,12 @@ const { img, resume } = Astro.props as Props;
   setRotation(torus2, torus2InitialRotation);
   scene.add(torus2);
 
-  setPosition(dodecahedron, dodecahedronInitialPosition);
-  setRotation(dodecahedron, dodecahedronInitialRotation);
-  // scene.add(dodecahedron);
-
   const ambientLight = new THREE.AmbientLight(0xffffff);
   scene.add(ambientLight);
 
-  const pointLight = new THREE.PointLight(0xffffff, 1);
-  setPosition(pointLight, [0, 0, 0]);
-  scene.add(pointLight);
+  // const pointLight = new THREE.PointLight(0xffffff, 1);
+  // setPosition(pointLight, [0, 0, 0]);
+  // scene.add(pointLight);
 
   function animate() {
     torus1.rotation.x += 0.003;

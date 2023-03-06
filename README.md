@@ -1,5 +1,7 @@
 # Pbthang's Portfolio
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/77f1ee90-5361-4717-b7e2-c5f84f6db646/deploy-status)](https://app.netlify.com/sites/pbthang/deploys)
+
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:

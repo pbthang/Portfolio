@@ -9,6 +9,5 @@ import netlify from "@astrojs/netlify/edge-functions";
 export default defineConfig({
   integrations: [tailwind(), sitemap(), robotsTxt()],
   site: "https://pbthang.netlify.app",
-  output: "server",
   adapter: netlify(),
 });

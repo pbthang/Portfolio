@@ -33,6 +33,7 @@ const { contacts } = Astro.props as Props;
             target="_blank"
             rel="noreferrer"
             class="hover:text-accent duration-150"
+            aria-label={c.name}
           >
             <i class={`ti ti-${c.icon} text-2xl`} />
           </a>
@@ -44,7 +45,7 @@ const { contacts } = Astro.props as Props;
       <span>Singapore</span>
     </div>
   </div>
-  <div>
+  <div class="leading-6">
     <p>Made by Thang Pham</p>
   </div>
 </footer>

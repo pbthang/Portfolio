@@ -3,19 +3,87 @@
   id="Contact"
 >
   <div class="container flex justify-center">
-    <div class="px-4 py-8 w-full max-w-6xl">
+    <div class="px-4 py-8 w-full max-w-3xl">
       <h1 class="text-4xl font-bold mb-6">Contact</h1>
       <div>
-        <div
-          data-tf-widget="pXaDC19G"
-          data-tf-opacity="100"
-          data-tf-iframe-props="title=Contact Form Portfolio"
-          data-tf-transitive-search-params
-          data-tf-medium="snippet"
-          style="width:100%;height:500px;"
+        <form
+          id="contact-form"
+          name="contactForm"
+          accept-charset="utf-8"
+          action="https://formspree.io/f/mpzkjypd"
+          method="POST"
         >
-        </div><script is:inline src="//embed.typeform.com/next/embed.js"
-        ></script>
+          <div class="form-control w-full" id="form-contact-name">
+            <label class="label" for="contact-name">
+              <span class="label-text">Your name</span>
+              <span class="label-text-alt text-error">***</span>
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="contact-name"
+              placeholder="Name"
+              required
+              auto-complete="on"
+              class="input w-full"
+            />
+          </div>
+
+          <div class="form-control w-full" id="form-contact-email">
+            <label class="label" for="contact-email">
+              <span class="label-text">Your email</span>
+              <span class="label-text-alt text-error">***</span>
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="contact-email"
+              placeholder="Email*"
+              required
+              auto-complete="on"
+              class="input w-full"
+            />
+          </div>
+
+          <div class="form-control w-full" id="form-contact-subject">
+            <label class="label" for="contact-subject">
+              <span class="label-text">Subject</span>
+            </label>
+            <input
+              type="text"
+              name="subject"
+              id="contact-subject"
+              placeholder="Subject"
+              auto-complete="nope"
+              class="input w-full"
+            />
+          </div>
+
+          <div class="form-control w-full" id="form-contact-message">
+            <label class="label" for="contact-message">
+              <span class="label-text">Your message</span>
+              <span class="label-text-alt text-error">***</span>
+            </label>
+            <textarea
+              name="message"
+              id="contact-message"
+              placeholder="Your Message*"
+              required
+              auto-complete="nope"
+              class="textarea resize-none h-40"></textarea>
+          </div>
+          <div id="form-contact-submit">
+            <button
+              type="submit"
+              class="group btn float-right pl-8 pr-[10px] mt-6 flex items-center gap-2"
+            >
+              <span class="">SEND IT</span>
+              <i
+                class="ti ti-arrow-narrow-right text-2xl -translate-y-[1px] group-hover:translate-x-6 transition-all duration-300 ease-in-out"
+              ></i></button
+            >
+          </div>
+        </form>
       </div>
     </div>
   </div>

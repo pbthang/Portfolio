@@ -13,7 +13,7 @@ const client = contentful.createClient({
   accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN || "dummy",
 });
 
-const response = await client.getEntry("4YbeNIPoSrVXEhCUaGs9Yp");
+const response = (await client.getEntry("4YbeNIPoSrVXEhCUaGs9Yp")) as any;
 const coverImage = "https:" + response.fields.coverImage.fields.file.url;
 const profileImage = "https:" + response.fields.profileImage.fields.file.url;
 const resume = "https:" + response.fields.resume.fields.file.url;

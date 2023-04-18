@@ -25,7 +25,7 @@ const { img, resume } = Astro.props as Props;
   <canvas
     class="hero-bg hero-overlay bg-opacity-10 w-full h-full z-0 bg-secondary"
   ></canvas>
-  <div class="hero-overlay bg-opacity-40 z-0"></div>
+  <div class="hero-overlay bg-opacity-0 z-0"></div>
   <div
     class="hero-content w-10/12 text-neutral-content z-3"
     role="region"
@@ -109,10 +109,10 @@ const { img, resume } = Astro.props as Props;
 
   renderer.render(scene, camera);
 
-  const geometry2 = new THREE.TorusKnotGeometry(6, 2.5, 200, 32);
+  const geometry2 = new THREE.TorusKnotGeometry(7, 2, 200, 32);
 
   const material2 = new THREE.MeshStandardMaterial({
-    color: 0xfca311,
+    color: 0x8e5343,
     roughness: 0,
     metalness: 1,
   });
@@ -121,7 +121,7 @@ const { img, resume } = Astro.props as Props;
 
   console.log(window.matchMedia("(max-width: 600px)").matches);
   const torus2InitialPosition = [10, 0, 0];
-  const torus2InitialRotation = [0, 0.6, -0.4];
+  const torus2InitialRotation = [0, 0.8, 0.8];
 
   setPosition(torus2, torus2InitialPosition);
   setRotation(torus2, torus2InitialRotation);
@@ -134,10 +134,19 @@ const { img, resume } = Astro.props as Props;
   // setPosition(pointLight, [0, 0, 0]);
   // scene.add(pointLight);
 
+  let t = 0;
   function animate() {
-    torus2.rotation.x += 0.003;
-    torus2.rotation.y += 0.003;
-    torus2.rotation.z += 0.002;
+    // setRotation(torus2, [
+    //   torus2.rotation.x + 0.003,
+    //   torus2.rotation.y + 0.003,
+    //   torus2.rotation.z + 0.002,
+    // ]);
+    setPosition(torus2, [
+      torus2InitialPosition[0],
+      torus2InitialPosition[1] + Math.sin(t),
+      torus2InitialPosition[2],
+    ]);
+    t = t + 0.01;
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
   }
@@ -161,21 +170,16 @@ const { img, resume } = Astro.props as Props;
 
   document.addEventListener("scroll", () => {
     const y = window.scrollY;
-    setPosition(torus2, [
-      torus2InitialPosition[0],
-      torus2InitialPosition[1] - y / 60,
-      torus2InitialPosition[2],
-    ]);
+    // setPosition(torus2, [
+    //   torus2InitialPosition[0],
+    //   torus2InitialPosition[1] + y / 60,
+    //   torus2InitialPosition[2],
+    // ]);
 
-    // setRotation(torus1, [
-    //   torus1InitialRotation[0] + y / 110,
-    //   torus1InitialRotation[1] + y / 100,
-    //   torus1InitialRotation[2] + y / 800,
-    // ]);
-    // setRotation(torus2, [
-    //   torus2InitialRotation[0],
-    //   torus2InitialRotation[1] - y / 200,
-    //   torus2InitialRotation[2],
-    // ]);
+    setRotation(torus2, [
+      torus2InitialRotation[0] + y / 300,
+      torus2InitialRotation[1] + y / 200,
+      torus2InitialRotation[2],
+    ]);
   });
 </script>

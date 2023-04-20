@@ -16,9 +16,10 @@ interface Props {
     time: string;
     description: string;
   }[];
+  playlistUrl: string;
 }
 
-const { img, education, experience } = Astro.props as Props;
+const { img, education, experience, playlistUrl } = Astro.props as Props;
 ---
 
 <section class="container flex justify-center mx-auto py-8 w-full" id="About">
@@ -49,7 +50,7 @@ const { img, education, experience } = Astro.props as Props;
           class=""><code>Thank you and have a nice day!<span class="blinking">_</span></code></pre>
       </div>
       <div class="avatar aspect-auto flex-0">
-        <div class="w-60 max-w-md rounded-lg">
+        <div class="w-60 max-w-md rounded">
           <img src={img} alt="profile-img" />
         </div>
       </div>
@@ -60,7 +61,7 @@ const { img, education, experience } = Astro.props as Props;
       <TimelineCard title="Education" timeline={education} />
       <TimelineCard title="Experience" timeline={experience} />
     </div>
-    <Hobbies />
+    <Hobbies playlistUrl={playlistUrl} />
   </div>
 </section>
 

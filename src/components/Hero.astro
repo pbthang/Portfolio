@@ -31,7 +31,7 @@ const { img, resume } = Astro.props as Props;
     role="region"
     aria-label="Hello world! I am Thang Pham, a Software Engineer, a CS student, and a Vietnamese"
   >
-    <div class="max-w-4xl w-full font-bold text-base">
+    <div class="max-w-3xl w-full font-bold text-base">
       <div class="">
         <div class="mb-4 text-4xl sm:text-5xl lg:text-6xl">Hello world!</div>
         <div class="mb-4 text-2xl sm:text-4xl lg:text-5xl">
@@ -119,7 +119,6 @@ const { img, resume } = Astro.props as Props;
 
   const torus2 = new THREE.Mesh(geometry2, material2);
 
-  console.log(window.matchMedia("(max-width: 600px)").matches);
   const torus2InitialPosition = [10, 0, 0];
   const torus2InitialRotation = [0, 0.8, 0.8];
 

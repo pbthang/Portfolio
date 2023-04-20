@@ -1,4 +1,10 @@
 ---
+interface Props {
+  playlistUrl: string;
+}
+
+const { playlistUrl } = Astro.props as Props;
+console.log(playlistUrl);
 ---
 
 <div class="card flex bg-base-100 w-full max-w-8xl">
@@ -7,7 +13,7 @@
     <div class="w-full max-w-8xl mt-4">
       <iframe
         class="rounded-xl"
-        src="https://open.spotify.com/embed/playlist/37i9dQZF1EpLSVXF2PM0G1?utm_source=generator"
+        src={playlistUrl}
         width="100%"
         height="380"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"

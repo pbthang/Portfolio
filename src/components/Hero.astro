@@ -129,23 +129,13 @@ const { img, resume } = Astro.props as Props;
   const ambientLight = new THREE.AmbientLight(0xffffff);
   scene.add(ambientLight);
 
-  // const pointLight = new THREE.PointLight(0xffffff, 1);
-  // setPosition(pointLight, [0, 0, 0]);
-  // scene.add(pointLight);
-
-  let t = 0;
+  const clock = new THREE.Clock();
   function animate() {
-    // setRotation(torus2, [
-    //   torus2.rotation.x + 0.003,
-    //   torus2.rotation.y + 0.003,
-    //   torus2.rotation.z + 0.002,
-    // ]);
     setPosition(torus2, [
       torus2InitialPosition[0],
-      torus2InitialPosition[1] + Math.sin(t),
+      torus2InitialPosition[1] + Math.cos(clock.getElapsedTime()),
       torus2InitialPosition[2],
     ]);
-    t = t + 0.01;
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
   }

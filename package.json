@@ -14,7 +14,7 @@
     "@astrojs/netlify": "^2.2.0",
     "@astrojs/sitemap": "^1.0.1",
     "@astrojs/tailwind": "^3.0.0",
-    "@tabler/icons-webfont": "^2.1.2",
+    "@tabler/icons-webfont": "^2.17.0",
     "astro": "^2.1.9",
     "astro-robots-txt": "^0.3.11",
     "contentful": "^9.3.0",

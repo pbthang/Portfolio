@@ -2,11 +2,13 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/77f1ee90-5361-4717-b7e2-c5f84f6db646/deploy-status)](https://app.netlify.com/sites/pbthang/deploys)
 
+My personal portfolio developed with [Astro](https://astro.build), [TailwindCSS](https://tailwindcss.com) and deployed on [Netlify](https://netlify.com) at [https://pbthang.netlify.app/](https://pbthang.netlify.app/).
+
 ## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
+Inside of your project, you'll see the following folders and files:
 
-```
+```txt
 /
 ├── public/
 │   └── favicon.svg
@@ -15,8 +17,10 @@ Inside of your Astro project, you'll see the following folders and files:
 │   │   └── ...
 │   ├── layouts/
 │   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
+│   ├── pages/
+│   │   └── index.astro
+│   └── utils/
+│       └── ...
 └── package.json
 ```
 
@@ -38,4 +42,5 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro --help` | Get help using the Astro CLI                       |
 
 ## Astro
+
 [Documentation](https://docs.astro.build)

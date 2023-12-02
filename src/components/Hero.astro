@@ -112,9 +112,12 @@ const { img, resume } = Astro.props as Props;
   //   new RoomEnvironment(),
   //   0.04
   // ).texture;
-  const pointLight = new THREE.PointLight(0xffffff, 1);
-  pointLight.position.set(0, 0, 0);
-  scene.add(pointLight);
+  const light = new THREE.DirectionalLight(0xffffff, 2.4);
+  light.position.set(-6, 10, 10);
+  scene.add(light);
+
+  const ambientLight = new THREE.AmbientLight(0xffffff);
+  scene.add(ambientLight);
 
   renderer.setSize(window.innerWidth, window.innerHeight);
   camera.lookAt(scene.position);
@@ -127,45 +130,21 @@ const { img, resume } = Astro.props as Props;
   let modelInitialRotation = [0.5, -1, 0];
   let screenInitialRotation = [0, Math.PI, 0];
   let modelInitialPosition = [6, -10, -16];
-  const textureLoader = new THREE.TextureLoader();
-  const laptopFrameEmi = textureLoader.load(
-    "assets/laptop/textures/LaptopFrameEmi.png"
-  );
-  const laptopFrameTexture = textureLoader.load(
-    "assets/laptop/textures/LaptopFrameTexture.png"
-  );
-  const laptopScreenEmiGloss = textureLoader.load(
-    "assets/laptop/textures/LaptopScreenEmiGloss.png"
-  );
-  const laptopScreenTexture = textureLoader.load(
-    "assets/laptop/textures/Untitled.png"
-  );
+
   loader.load(
-    "assets/laptop/source/Laptop.fbx",
+    "/laptop/source/Laptop.fbx",
     (object) => {
       model = object;
       setPosition(model, modelInitialPosition);
       setRotation(model, modelInitialRotation);
-      console.log(model);
       model.traverse((child) => {
         if (child instanceof THREE.Mesh) {
           if (child.name === "Frame") {
-            child.material = new THREE.MeshStandardMaterial({
-              map: laptopFrameTexture,
-              emissive: laptopFrameEmi,
-              emissiveIntensity: 0.5,
-              roughness: 0.5,
-              metalness: 0.5,
-            });
+            child.material.roughness = 0.5;
           }
           if (child.name === "Screen") {
-            child.material = new THREE.MeshStandardMaterial({
-              map: laptopScreenTexture,
-              emissive: laptopScreenEmiGloss,
-              emissiveIntensity: 0.5,
-              roughness: 0.5,
-              metalness: 0.5,
-            });
+            child.material.roughness = 0.5;
+            child.material.metalness = 0.5;
             screen = child;
             setRotation(child, screenInitialRotation);
           }
@@ -180,9 +159,6 @@ const { img, resume } = Astro.props as Props;
       console.log(error);
     }
   );
-
-  const ambientLight = new THREE.AmbientLight(0xffffff);
-  scene.add(ambientLight);
 
   const clock = new THREE.Clock();
   function animate() {

@@ -41,14 +41,14 @@ const { img, education, experience, playlistUrl } = Astro.props as Props;
           class="text-success"><code>less interest.txt</code></pre>
         <code
           >I'm interested in creating applications that are aesthetically
-          pleasing and solve real problems. I have experience in both frontend
-          development backend development and enjoy learning about new
+          pleasing and solve real problems. <br />I have experience in both
+          frontend development backend development and enjoy learning about new
           technologies.</code
         >
         <pre><code>:q</code></pre>
         <pre
           data-prefix="$"
-          class=""><code>Thank you and have a nice day!<span class="blinking">_</span></code></pre>
+          class=""><code>Have a nice day!<span class="blinking">_</span></code></pre>
       </div>
       <div class="avatar aspect-auto flex-0">
         <div class="w-60 max-w-md rounded">
@@ -56,13 +56,13 @@ const { img, education, experience, playlistUrl } = Astro.props as Props;
         </div>
       </div>
     </div>
-    <div
+    <!-- <div
       class="md:flex md:justify-between md:gap-6 md:content-start md:space-y-0 space-y-8"
     >
       <TimelineCard title="Education" timeline={education} />
       <TimelineCard title="Experience" timeline={experience} />
-    </div>
-    <Hobbies playlistUrl={playlistUrl} />
+    </div> -->
+    <!-- <Hobbies playlistUrl={playlistUrl} /> -->
   </div>
 </section>
 

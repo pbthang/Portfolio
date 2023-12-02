@@ -9,7 +9,7 @@ const { img, resume } = Astro.props as Props;
 ---
 
 <div
-  class="hero min-h-screen bg-cover bg-center bg-fixed relative"
+  class="hero bg-zinc-900 min-h-screen bg-cover bg-center bg-fixed relative"
   style={`background-image: url(${img});`}
 >
   <a
@@ -24,21 +24,21 @@ const { img, resume } = Astro.props as Props;
   <div class="hidden">Image by rawpixel.com on Freepik</div>
   <!-- <div class="hero min-h-screen bg-cover bg-center bg-fixed relative"> -->
   <canvas
-    class="hero-bg hero-overlay bg-opacity-10 w-full h-full z-0 bg-secondary"
+    class="hero-bg hero-overlay bg-opacity-10 w-full h-full z-0 bg-primary"
   ></canvas>
   <div class="hero-overlay bg-opacity-0 z-0"></div>
   <div
     class="hero-content w-10/12 text-neutral-content z-3"
     role="region"
-    aria-label="Hello world! I am Thang Pham, a Software Engineer, a CS student, and a Vietnamese"
+    aria-label="Hello world! I am Thang Pham, a Software Engineer, a CS student, and a Vietnamese."
   >
-    <div class="max-w-3xl w-full font-bold text-base">
-      <div class="">
-        <div class="mb-4 text-4xl sm:text-5xl lg:text-6xl">Hello world!</div>
-        <div class="mb-4 text-2xl sm:text-4xl lg:text-5xl">
+    <div class="max-w-3xl w-full">
+      <div class="font-mono">
+        <div class="mb-3 text-2xl sm:text-3xl lg:text-4xl">Hello world!</div>
+        <div class="mb-3 text-2xl sm:text-3xl lg:text-4xl">
           I am Thang Pham,
         </div>
-        <div class="mb-8 text-2xl sm:text-4xl lg:text-5xl">
+        <div class="mb-8 text-2xl sm:text-3xl lg:text-4xl">
           a <span id="typewriter"></span>
         </div>
       </div>
@@ -67,10 +67,8 @@ const { img, resume } = Astro.props as Props;
   import * as THREE from "three";
   import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 
-  import { RoomEnvironment } from "../utils/RoomEnvironment";
-
   new Typewriter("#typewriter", {
-    strings: ["Software Engineer", "CS student", "Vietnamese"],
+    strings: ["Software Engineer,", "CS student,", "Vietnamese."],
     autoStart: true,
     loop: true,
     // cursor: "_",

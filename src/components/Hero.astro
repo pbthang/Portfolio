@@ -129,19 +129,19 @@ const { img, resume } = Astro.props as Props;
   let modelInitialPosition = [6, -10, -16];
   const textureLoader = new THREE.TextureLoader();
   const laptopFrameEmi = textureLoader.load(
-    "public/laptop/textures/LaptopFrameEmi.png"
+    "assets/laptop/textures/LaptopFrameEmi.png"
   );
   const laptopFrameTexture = textureLoader.load(
-    "public/laptop/textures/LaptopFrameTexture.png"
+    "assets/laptop/textures/LaptopFrameTexture.png"
   );
   const laptopScreenEmiGloss = textureLoader.load(
-    "public/laptop/textures/LaptopScreenEmiGloss.png"
+    "assets/laptop/textures/LaptopScreenEmiGloss.png"
   );
   const laptopScreenTexture = textureLoader.load(
-    "public/laptop/textures/Untitled.png"
+    "assets/laptop/textures/Untitled.png"
   );
   loader.load(
-    "public/laptop/source/Laptop.fbx",
+    "assets/laptop/source/Laptop.fbx",
     (object) => {
       model = object;
       setPosition(model, modelInitialPosition);

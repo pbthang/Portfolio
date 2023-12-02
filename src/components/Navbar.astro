@@ -8,7 +8,7 @@ const navLinks = [
 ---
 
 <nav
-  class="navbar fixed top-0 z-30 h-16 w-full transition-all duration-100 shadow-transparent bg-opacity-80 text-base-content"
+  class="navbar fixed top-0 z-30 h-16 w-full transition-all duration-100 shadow-transparent bg-opacity-80 text-primary-content"
 >
   <div class="navbar-start">
     <div class="dropdown">
@@ -34,10 +34,10 @@ const navLinks = [
     >
       <i class={`ti ti-code-dots text-2xl`}></i>
 
-      <span class="ml-2 text-base-content">pbthang</span>
+      <span class="ml-2">pbthang</span>
     </div>
   </div>
-  <div class="navbar-center hidden md:flex text-base-content">
+  <div class="navbar-center hidden md:flex">
     <ul class="menu menu-horizontal rounded-box">
       {
         navLinks.map((nl) => (

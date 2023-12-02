@@ -1,4 +1,5 @@
 ---
+import { Code } from "astro/components";
 interface Props {
   img: string;
   resume: string;
@@ -12,7 +13,7 @@ const { img, resume } = Astro.props as Props;
   style={`background-image: url(${img});`}
 >
   <a
-    class="absolute bottom-0 pt-2 pb-4 w-full group flex justify-center z-10"
+    class="absolute bottom-0 pt-2 pb-4 w-full group flex justify-center z-10 text-primary-content"
     href="#About"
     aria-label="Scroll to main section"
   >
@@ -64,6 +65,7 @@ const { img, resume } = Astro.props as Props;
 <script>
   import Typewriter from "typewriter-effect/dist/core";
   import * as THREE from "three";
+  import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 
   import { RoomEnvironment } from "../utils/RoomEnvironment";
 
@@ -97,45 +99,104 @@ const { img, resume } = Astro.props as Props;
   const renderer = new THREE.WebGLRenderer({
     canvas,
     alpha: true,
+    antialias: true,
   });
+  renderer.setClearColor(0x000000, 0);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
   const scene = new THREE.Scene();
   const pmremGenerator = new THREE.PMREMGenerator(renderer);
-  scene.environment = pmremGenerator.fromScene(
-    new RoomEnvironment(),
-    0.04
-  ).texture;
+  // scene.environment = pmremGenerator.fromScene(
+  //   new RoomEnvironment(),
+  //   0.04
+  // ).texture;
+  const pointLight = new THREE.PointLight(0xffffff, 1);
+  pointLight.position.set(0, 0, 0);
+  scene.add(pointLight);
+
   renderer.setSize(window.innerWidth, window.innerHeight);
   camera.lookAt(scene.position);
 
   renderer.render(scene, camera);
 
-  const geometry2 = new THREE.TorusKnotGeometry(7, 2, 200, 32);
-
-  const material2 = new THREE.MeshStandardMaterial({
-    color: 0x8e5343,
-    roughness: 0,
-    metalness: 1,
-  });
-
-  const torus2 = new THREE.Mesh(geometry2, material2);
-
-  const torus2InitialPosition = [10, 0, 0];
-  const torus2InitialRotation = [0, 0.8, 0.8];
-
-  setPosition(torus2, torus2InitialPosition);
-  setRotation(torus2, torus2InitialRotation);
-  scene.add(torus2);
+  const loader = new FBXLoader();
+  let model;
+  let screen;
+  let modelInitialRotation = [0.5, -1, 0];
+  let screenInitialRotation = [0, Math.PI, 0];
+  let modelInitialPosition = [6, -10, -16];
+  const textureLoader = new THREE.TextureLoader();
+  const laptopFrameEmi = textureLoader.load(
+    "public/laptop/textures/LaptopFrameEmi.png"
+  );
+  const laptopFrameTexture = textureLoader.load(
+    "public/laptop/textures/LaptopFrameTexture.png"
+  );
+  const laptopScreenEmiGloss = textureLoader.load(
+    "public/laptop/textures/LaptopScreenEmiGloss.png"
+  );
+  const laptopScreenTexture = textureLoader.load(
+    "public/laptop/textures/Untitled.png"
+  );
+  loader.load(
+    "public/laptop/source/Laptop.fbx",
+    (object) => {
+      model = object;
+      setPosition(model, modelInitialPosition);
+      setRotation(model, modelInitialRotation);
+      console.log(model);
+      model.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          if (child.name === "Frame") {
+            child.material = new THREE.MeshStandardMaterial({
+              map: laptopFrameTexture,
+              emissive: laptopFrameEmi,
+              emissiveIntensity: 0.5,
+              roughness: 0.5,
+              metalness: 0.5,
+            });
+          }
+          if (child.name === "Screen") {
+            child.material = new THREE.MeshStandardMaterial({
+              map: laptopScreenTexture,
+              emissive: laptopScreenEmiGloss,
+              emissiveIntensity: 0.5,
+              roughness: 0.5,
+              metalness: 0.5,
+            });
+            screen = child;
+            setRotation(child, screenInitialRotation);
+          }
+        }
+      });
+      scene.add(model);
+    },
+    (xhr) => {
+      console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
 
   const ambientLight = new THREE.AmbientLight(0xffffff);
   scene.add(ambientLight);
 
   const clock = new THREE.Clock();
   function animate() {
-    setPosition(torus2, [
-      torus2InitialPosition[0],
-      torus2InitialPosition[1] + Math.cos(clock.getElapsedTime()),
-      torus2InitialPosition[2],
-    ]);
+    // setPosition(torus2, [
+    //   torus2InitialPosition[0],
+    //   torus2InitialPosition[1] + Math.cos(clock.getElapsedTime()),
+    //   torus2InitialPosition[2],
+    // ]);
+    model &&
+      setPosition(model, [
+        modelInitialPosition[0],
+        modelInitialPosition[1] + Math.cos(clock.getElapsedTime()),
+        modelInitialPosition[2],
+      ]);
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
   }
@@ -147,28 +208,19 @@ const { img, resume } = Astro.props as Props;
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  // window.addEventListener("mousemove", (e) => {
-  //   const x = e.clientX / window.innerWidth;
-  //   const y = e.clientY / window.innerHeight;
-  //   setPosition(pointLight, [
-  //     (x - 0.5) * 100,
-  //     (y - 0.5) * 100,
-  //     pointLight.position.z,
-  //   ]);
-  // });
-
   document.addEventListener("scroll", () => {
     const y = window.scrollY;
-    // setPosition(torus2, [
-    //   torus2InitialPosition[0],
-    //   torus2InitialPosition[1] + y / 60,
-    //   torus2InitialPosition[2],
-    // ]);
 
-    setRotation(torus2, [
-      torus2InitialRotation[0] + y / 300,
-      torus2InitialRotation[1] + y / 200,
-      torus2InitialRotation[2],
+    setRotation(screen, [
+      screenInitialRotation[0] + Math.min(y / 300, Math.PI / 2),
+      screenInitialRotation[1],
+      screenInitialRotation[2],
+    ]);
+
+    setRotation(model, [
+      modelInitialRotation[0],
+      modelInitialRotation[1] + y * 0.001,
+      modelInitialRotation[2],
     ]);
   });
 </script>

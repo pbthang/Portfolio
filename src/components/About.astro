@@ -24,9 +24,9 @@ const { img, education, experience, playlistUrl } = Astro.props as Props;
 
 <section class="container flex justify-center mx-auto py-8 w-full" id="About">
   <div class="px-4 py-8 max-w-4xl">
-    <h1 class="text-4xl font-bold">About me</h1>
+    <h1 class="text-4xl font-bold max-w-fit">About me</h1>
     <div
-      class="flex flex-wrap-reverse justify-between w-full gap-8 space-y-4 md:space-y-0 mt-6"
+      class="flex flex-wrap-reverse justify-between w-full gap-8 space-y-4 md:space-y-0 py-6"
     >
       <div class="mockup-code break-words flex-1">
         <pre data-prefix="$" class="text-success"><code>whoami</code></pre>
@@ -42,39 +42,39 @@ const { img, education, experience, playlistUrl } = Astro.props as Props;
         <code
           >I'm interested in creating applications that are aesthetically
           pleasing and solve real problems. <br />I have experience in both
-          frontend development backend development and enjoy learning about new
-          technologies.</code
+          frontend development backend development and I really enjoy playing
+          with new technologies.</code
         >
         <pre><code>:q</code></pre>
         <pre
           data-prefix="$"
           class=""><code>Have a nice day!<span class="blinking">_</span></code></pre>
       </div>
-      <div class="avatar aspect-auto flex-0">
+      <div class="avatar aspect-auto flex-0 rounded">
         <div class="w-60 max-w-md rounded">
           <img src={img} alt="profile-img" />
         </div>
       </div>
     </div>
-    <!-- <div
+    <div
       class="md:flex md:justify-between md:gap-6 md:content-start md:space-y-0 space-y-8"
     >
       <TimelineCard title="Education" timeline={education} />
       <TimelineCard title="Experience" timeline={experience} />
-    </div> -->
-    <!-- <Hobbies playlistUrl={playlistUrl} /> -->
+    </div>
+    <Hobbies playlistUrl={playlistUrl} />
   </div>
 </section>
 
 <style>
-  /* .avatar {
-    box-shadow: 14px 14px 0 hsl(var(--a), 0), -14px -14px 0 hsl(var(--p), 0);
+  .avatar {
+    box-shadow: 14px 14px 0 hsl(var(--s), 0), -14px -14px 0 hsl(var(--p), 0);
     transition: all 0.3s ease;
   }
   .avatar:hover {
-    box-shadow: 14px 14px 0 hsl(var(--a)), -14px -14px 0 hsl(var(--p));
+    box-shadow: 14px 14px 0 hsl(var(--s)), -14px -14px 0 hsl(var(--p));
     transition: all 0.3s ease;
-  } */
+  }
   .blinking {
     animation: 1s blink step-end infinite;
   }

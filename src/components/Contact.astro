@@ -4,12 +4,12 @@
 >
   <div class="container flex justify-center">
     <div class="px-4 py-8 w-full max-w-3xl">
-      <h1 class="text-4xl font-bold">Contact</h1>
+      <h1 class="text-4xl font-bold max-w-fit">Contact</h1>
       <sub class="mb-6 text-base text-neutral-content">
         <span>Feel free to drop me a message</span>
         <i class="ti ti-message text-base"></i>
       </sub>
-      <div class="mt-6">
+      <div class="mt-6 text-base-content">
         <form
           id="contact-form"
           name="contactForm"
@@ -79,11 +79,13 @@
           <div id="form-contact-submit">
             <button
               type="submit"
-              class="group btn btn-primary border-primary-content hover:border-primary-content float-right pl-8 pr-[10px] mt-6 flex items-center gap-2"
+              class="group btn btn-sm btn-link text-neutral-content no-underline hover:no-underline float-right mt-4 flex items-center gap-0.5"
             >
-              <span class="">SEND IT</span>
+              <span class="text-xl transition-colors group-hover:text-secondary"
+                >SEND IT</span
+              >
               <i
-                class="ti ti-arrow-narrow-right text-2xl -translate-y-[1px] group-hover:translate-x-6 transition-all duration-300 ease-in-out"
+                class="ti ti-arrow-narrow-right text-2xl group-hover:translate-x-4 group-hover:text-secondary transition-[color_0ms,transform_300ms] ease-in-out"
               ></i></button
             >
           </div>

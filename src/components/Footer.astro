@@ -7,22 +7,39 @@ interface Props {
   }[];
 }
 const { contacts } = Astro.props as Props;
+
+const sections = [
+  {
+    text: "About me",
+    id: "#About",
+  },
+  {
+    text: "Skills",
+    id: "#Skills",
+  },
+  {
+    text: "My projects",
+    id: "#Projects",
+  },
+  {
+    text: "Contact",
+    id: "#Contact",
+  },
+];
 ---
 
 <footer class="footer footer-center p-8 bg-primary text-primary-content">
   <div class="grid grid-flow-col gap-4">
-    <a class="link link-hover hover:text-accent duration-150" href="#About"
-      >About me</a
-    >
-    <a class="link link-hover hover:text-accent duration-150" href="#Skills"
-      >Skills</a
-    >
-    <a class="link link-hover hover:text-accent duration-150" href="#Projects"
-      >My projects</a
-    >
-    <a class="link link-hover hover:text-accent duration-150" href="#Contact"
-      >Contact</a
-    >
+    {
+      sections.map((s) => (
+        <a
+          href={s.id}
+          class="link link-hover hover:text-accent duration-150 underline-offset-4"
+        >
+          {s.text}
+        </a>
+      ))
+    }
   </div>
   <div>
     <div class="grid grid-flow-col gap-4">

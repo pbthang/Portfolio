@@ -1,13 +1,6 @@
 ---
 import Hobbies from "./Hobbies.astro";
-import TimelineCard from "./TimelineCard.astro";
-
-interface Timestamp {
-  title: string;
-  time: string;
-  organization: string;
-  description: string;
-}
+import TimelineCard, { Timestamp } from "./TimelineCard.astro";
 
 interface Props {
   img: string;
@@ -97,7 +90,7 @@ const { img, education, experience, others, playlistUrl } =
         role="tabpanel"
         class="tab-content bg-base-100 border-base-300 rounded-box p-6"
       >
-        <TimelineCard title="Experience" timeline={others} />
+        <TimelineCard title="Others" timeline={others} />
       </div>
     </div>
     <Hobbies playlistUrl={playlistUrl} />

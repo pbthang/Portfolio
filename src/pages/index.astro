@@ -13,12 +13,14 @@ const client = contentful.createClient({
   accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN || "dummy",
 });
 
-const response = (await client.getEntry("4YbeNIPoSrVXEhCUaGs9Yp")) as any;
-const coverImage = "https:" + response.fields.coverImage.fields.file.url;
+const response = (await client.getEntry(
+  "4YbeNIPoSrVXEhCUaGs9Yp"
+)) as contentful.Entry<any>;
 const profileImage = "https:" + response.fields.profileImage.fields.file.url;
 const resume = "https:" + response.fields.resume.fields.file.url;
 const education = response.fields.education;
 const experience = response.fields.experience;
+const others = response.fields.others;
 const playlistUrl = response.fields.playlistUrl;
 const skills = response.fields.skills;
 const projectImages = response.fields.projectImages.map((obj) => {
@@ -31,12 +33,13 @@ const contacts = response.fields.contacts;
 ---
 
 <Layout contacts={contacts} photo={profileImage}>
-  <Hero img={coverImage} resume={resume} />
+  <Hero resume={resume} />
   <main class="">
     <About
       img={profileImage}
       education={education}
       experience={experience}
+      others={others}
       playlistUrl={playlistUrl}
     />
     <Skills skills={skills} />

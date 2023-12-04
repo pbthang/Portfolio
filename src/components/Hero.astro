@@ -94,12 +94,14 @@ const { resume } = Astro.props as Props;
   });
 
   const setPosition = (obj: THREE.Object3D, position: Number[]) => {
+    if (!obj) return;
     obj.position.x = position[0];
     obj.position.y = position[1];
     obj.position.z = position[2];
   };
 
   const setRotation = (obj: THREE.Object3D, rotation: Number[]) => {
+    if (!obj) return;
     obj.rotation.x = rotation[0];
     obj.rotation.y = rotation[1];
     obj.rotation.z = rotation[2];

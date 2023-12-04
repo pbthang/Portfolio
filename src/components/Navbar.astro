@@ -7,18 +7,13 @@ const navLinks = [
 ];
 ---
 
-<nav
-  class="navbar fixed top-0 z-30 h-16 w-full transition-all duration-100 shadow-transparent bg-opacity-90 text-primary-content"
->
+<nav class="navbar fixed top-0 z-30 h-16 w-full text-primary-content">
   <div class="navbar-start">
     <div class="dropdown">
       <label tabindex="0" class="btn btn-ghost md:hidden">
         <i class={`ti ti-menu-2 text-2xl`}></i>
       </label>
-      <ul
-        tabindex="0"
-        class="menu dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-opacity-80 shadow-transparent text-base-content"
-      >
+      <ul tabindex="0" class="menu dropdown-content mt-3 p-2 rounded-box w-52">
         {
           navLinks.map((nl) => (
             <li class="navlink">
@@ -56,6 +51,25 @@ const navLinks = [
 <style>
   nav {
     transition: background-color 0.5s ease !important;
+    background: transparent;
+  }
+
+  .menu {
+    background: transparent;
+  }
+
+  .menu.blurred {
+    backdrop-filter: blur(64px);
+    --tw-bg-opacity: 1;
+    --tw-bg-opacity: 0.9;
+    background-color: hsl(var(--p) / var(--tw-bg-opacity));
+  }
+
+  nav.blurred {
+    backdrop-filter: blur(16px);
+    --tw-bg-opacity: 1;
+    --tw-bg-opacity: 0.9;
+    background-color: hsl(var(--p) / var(--tw-bg-opacity));
   }
 </style>
 
@@ -78,16 +92,12 @@ const navLinks = [
     const nav = document.querySelector("nav");
     const menu = document.querySelector(".menu");
     const scrollPosition = window.scrollY;
-    if (scrollPosition > 5) {
-      nav.classList.remove("shadow-transparent", "bg-transparent");
-      nav.classList.add("backdrop-blur-lg", "bg-primary");
-      menu.classList.add("backdrop-blur-lg", "bg-primary");
-      menu.classList.remove("shadow-transparent", "bg-transparent");
+    if (scrollPosition > 100) {
+      nav.classList.add("blurred");
+      menu.classList.add("blurred");
     } else {
-      nav.classList.add("bg-transparent", "shadow-transparent");
-      nav.classList.remove("backdrop-blur-lg", "bg-primary");
-      menu.classList.add("bg-transparent", "shadow-transparent");
-      menu.classList.remove("backdrop-blur-lg", "bg-primary");
+      nav.classList.remove("blurred");
+      menu.classList.remove("blurred");
     }
   });
 </script>

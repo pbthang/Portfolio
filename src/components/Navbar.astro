@@ -16,7 +16,7 @@ const navLinks = [
       <ul tabindex="0" class="menu dropdown-content mt-3 p-2 rounded-box w-52">
         {
           navLinks.map((nl) => (
-            <li class="navlink">
+            <li class="navlink hover:text-accent">
               <div data-href={nl.href}>{nl.name}</div>
             </li>
           ))
@@ -36,7 +36,7 @@ const navLinks = [
     <ul class="menu menu-horizontal rounded-box">
       {
         navLinks.map((nl) => (
-          <li class="navlink">
+          <li class="navlink hover:text-accent">
             <div data-href={nl.href}>{nl.name}</div>
           </li>
         ))
